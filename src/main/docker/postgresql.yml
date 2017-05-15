@@ -1,0 +1,12 @@
+version: '2'
+services:
+    sprangular-postgresql:
+        image: postgres:9.6.2
+        # volumes:
+        #     - ~/volumes/jhipster/sprangular/postgresql/:/var/lib/postgresql/
+        environment:
+            - POSTGRES_DB=sprangular
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=12
+        ports:
+            - 5432:5432
