@@ -20,7 +20,7 @@ const ADMIN_ROUTES = [
     healthRoute,
     logsRoute,
     ...userMgmtRoute,
-    metricsRoute
+    metricsRoute,
 ];
 
 export const adminState: Routes = [{

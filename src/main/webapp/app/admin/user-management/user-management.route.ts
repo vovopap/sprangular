@@ -22,9 +22,7 @@ export class UserResolve implements CanActivate {
 
 @Injectable()
 export class UserResolvePagingParams implements Resolve<any> {
-
     constructor(private paginationUtil: PaginationUtil) {}
-
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const page = route.queryParams['page'] ? route.queryParams['page'] : '1';
         const sort = route.queryParams['sort'] ? route.queryParams['sort'] : 'id,asc';

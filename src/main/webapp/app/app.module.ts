@@ -23,6 +23,8 @@ import {
     ErrorComponent
 } from './layouts';
 
+import {ProductModule} from './product/product.module';
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -32,14 +34,15 @@ import {
         SprangularHomeModule,
         SprangularAdminModule,
         SprangularAccountModule,
-        SprangularEntityModule
+        SprangularEntityModule,
+        ProductModule
     ],
     declarations: [
         JhiMainComponent,
         NavbarComponent,
         ErrorComponent,
         PageRibbonComponent,
-        FooterComponent
+        FooterComponent,
     ],
     providers: [
         ProfileService,

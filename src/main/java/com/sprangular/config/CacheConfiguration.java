@@ -41,6 +41,7 @@ public class CacheConfiguration {
     public JCacheManagerCustomizer cacheManagerCustomizer() {
         return cm -> {
             cm.createCache(com.sprangular.domain.User.class.getName(), jcacheConfiguration);
+            cm.createCache(com.sprangular.domain.Product.class.getName(), jcacheConfiguration);
             cm.createCache(com.sprangular.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(com.sprangular.domain.User.class.getName() + ".authorities", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
