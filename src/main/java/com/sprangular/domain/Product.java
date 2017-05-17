@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "product")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Product extends AbstractAuditingEntity implements Serializable {
+public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -22,6 +22,14 @@ public class Product extends AbstractAuditingEntity implements Serializable {
     @Size(max = 50)
     @Column(name = "name", length = 50)
     private String pName;
+
+    public boolean isActivated() {
+        return activated;
+    }
+
+    public void setActivated(boolean activated) {
+        this.activated = activated;
+    }
 
     @Column(name = "activated")
     private boolean activated = true;
@@ -70,11 +78,11 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         this.price = price;
     }
 
-    public String getPhoto() {
+    public String getImageUrl() {
         return imageUrl;
     }
 
-    public void setPhoto(String photo) {
+    public void setImageUrl(String photo) {
         this.imageUrl = imageUrl;
     }
 
