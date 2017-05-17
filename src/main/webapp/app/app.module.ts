@@ -22,8 +22,8 @@ import {
     PageRibbonComponent,
     ErrorComponent
 } from './layouts';
-
 import {ProductModule} from './product/product.module';
+
 
 @NgModule({
     imports: [

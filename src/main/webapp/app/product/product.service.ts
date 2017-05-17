@@ -9,9 +9,10 @@ export class ProductService {
     constructor(private http:Http) {
     }
 
+
     getList():Observable<Product[]> {
         return this.http.get('api/products').map(res=>res.json());
     }
-
+  // write other CRUD methods here
 
 }

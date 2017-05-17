@@ -65,6 +65,10 @@ public class ProductDTO {
         return imageUrl;
     }
 
+    public Double getPrice() {
+        return price;
+    }
+
     public boolean isActivated() {
         return activated;
     }

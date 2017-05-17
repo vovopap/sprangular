@@ -1,8 +1,18 @@
-<h1 class="text-success">Success</h1>
+<table class="table table-striped table-bordered">
+    <thead>
+    <td>Name</td>
+    <td>Category</td>
+    <td>Price</td>
+    </thead>
+    <tr *ngFor="let item of products | async">
+        <td>{{item.name}}</td>
+        <td>{{item.category}}</td>
+        <td>{{item.price}}</td>
+    </tr>
+</table>
+<a class="btn btn-success"  routerLink="/product-create" routerLinkActive="active">Create Product</a>
 
-<ul>
-    <li *ngFor="let item of products | async">{{item.name}}</li>
-</ul>
+
 
 
 

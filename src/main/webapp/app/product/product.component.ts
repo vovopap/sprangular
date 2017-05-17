@@ -1,10 +1,7 @@
 import { Component} from '@angular/core';
 import {OnInit} from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import {Product} from "./product.model";
 import {ProductService} from "./product.service";
-import Observable = Rx.Observable;
-import Process = NodeJS.Process;
 import {Product} from "./product.model";
 @Component({
     selector: 'product',
@@ -25,11 +22,9 @@ export class ProductComponent implements OnInit {
     }
 
     getProducts() {
-        this.productService.getList().subscribe(
-            product => {
-                this.products = product
-            })
+        this.products = this.productService.getList();
     }
+
 
 
 }
