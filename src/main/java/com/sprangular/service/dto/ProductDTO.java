@@ -1,7 +1,9 @@
 package com.sprangular.service.dto;
 
 import com.sprangular.domain.Product;
+import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.Instant;
 
@@ -16,7 +18,7 @@ public class ProductDTO {
 
     @Size(max = 100)
     private String category;
-
+    @NotNull
     private Double price;
 
     @Size(max = 256)
@@ -31,6 +33,26 @@ public class ProductDTO {
     public ProductDTO(Product product) {
         this(product.getId(), product.getpName(), product.getCategory(), product.getPrice(),
             product.isActivated(), product.getImageUrl());
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public void setActivated(boolean activated) {
+        this.activated = activated;
     }
 
     public ProductDTO(Long id, String name, String category, Double price,

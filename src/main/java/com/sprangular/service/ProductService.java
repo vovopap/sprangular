@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -62,6 +63,26 @@ public class ProductService {
     @Transactional(readOnly = true)
     public Page<ProductDTO> getAllProducts(Pageable pageable) {
         return productRepository.findAll(pageable).map(ProductDTO::new);
+    }
+
+    public void deleteProduct(Long id) {
+        productRepository.delete(productRepository.findOneById(id));
+
+    }
+
+    public Optional<ProductDTO> updateProduct(Product productDTO) {
+        return Optional.of(productRepository
+            .findOne(productDTO.getId()))
+            .map(product -> {
+                product.setId(product.getId());
+                product.setpName(productDTO.getpName());
+                product.setCategory(productDTO.getCategory());
+                product.setImageUrl(productDTO.getImageUrl());
+                product.setActivated(productDTO.isActivated());
+                log.debug("Changed Information for User: {}", product);
+                return product;
+            })
+            .map(ProductDTO::new);
     }
 
 }

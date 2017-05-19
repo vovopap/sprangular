@@ -6,16 +6,20 @@ import {Route} from "@angular/router";
 import {RouterModule} from "@angular/router";
 import {CreateProductComponent} from "./create-product.component";
 import {productRoute} from "./product.route";
+import {FormsModule} from "@angular/forms";
+import {UpdateProductComponent} from "./product-update.component";
 
 @NgModule({
     imports: [
         CommonModule,
-        RouterModule.forRoot(productRoute, { useHash: true })
+        FormsModule,
+        RouterModule.forRoot(productRoute, {useHash: true})
     ],
 
     declarations: [
         ProductComponent,
-        CreateProductComponent
+        CreateProductComponent,
+        UpdateProductComponent
     ],
     providers: [ProductService]
 })

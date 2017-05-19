@@ -15,7 +15,7 @@ public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
@@ -38,7 +38,6 @@ public class Product implements Serializable {
     @Column(name = "category", length = 50)
     private String category;
 
-    @Size(max = 50)
     @Column(name = "price")
     private double price;
 
