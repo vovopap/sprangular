@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.Instant;
+import java.util.Arrays;
 
 /**
  * Created by ali on 5/17/17.
@@ -21,8 +22,7 @@ public class ProductDTO {
     @NotNull
     private Double price;
 
-    @Size(max = 256)
-    private String imageUrl;
+    private byte[] image;
 
     private boolean activated = false;
 
@@ -32,7 +32,7 @@ public class ProductDTO {
 
     public ProductDTO(Product product) {
         this(product.getId(), product.getpName(), product.getCategory(), product.getPrice(),
-            product.isActivated(), product.getImageUrl());
+            product.isActivated(), product.getImage());
     }
 
     public void setName(String name) {
@@ -47,8 +47,8 @@ public class ProductDTO {
         this.price = price;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     public void setActivated(boolean activated) {
@@ -56,14 +56,14 @@ public class ProductDTO {
     }
 
     public ProductDTO(Long id, String name, String category, Double price,
-                      boolean activated, String imageUrl) {
+                      boolean activated, byte[] image) {
 
         this.id = id;
         this.name = name;
         this.category = category;
         this.price = price;
         this.activated = activated;
-        this.imageUrl = imageUrl;
+        this.image = image;
     }
 
     public Long getId() {
@@ -83,8 +83,8 @@ public class ProductDTO {
         return category;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public byte[] getImage() {
+        return image;
     }
 
     public Double getPrice() {
@@ -96,14 +96,15 @@ public class ProductDTO {
     }
 
 
-
     @Override
     public String toString() {
-        return "UserDTO{" +
-            "Name='" + name + '\'' +
-            ", Category ='" + category + '\'' +
-            ", Price ='" + price + '\'' +
-            ", imageUrl='" + imageUrl + '\'' +
-            ", activated=" + activated + "}";
+        return "ProductDTO{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", category='" + category + '\'' +
+            ", price=" + price +
+            ", image=" + Arrays.toString(image) +
+            ", activated=" + activated +
+            '}';
     }
 }

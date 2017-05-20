@@ -3,12 +3,14 @@
     <td>Name</td>
     <td>Category</td>
     <td>Price</td>
+    <td>Image</td>
     <td>Functions</td>
     </thead>
     <tr *ngFor="let item of products">
         <td>{{item.name}}</td>
         <td>{{item.category}}</td>
         <td>{{item.price}}</td>
+        <td><img style="width: 100px" [src]="'data:image/png;base64,' + item.image" alt=""></td>
         <td><a class="btn btn-danger" (click)="delete(item);  $event.stopPropagation()">Delete</a> <a
             class="btn btn-primary"   [routerLink]="['/product-update', item.id]">Update</a></td>
 

@@ -62,7 +62,9 @@ spring:
         locator:
             discovery:
                 enabled: true
-
+    http:
+        multipart:
+          enabled: true
 liquibase:
     contexts: dev
 

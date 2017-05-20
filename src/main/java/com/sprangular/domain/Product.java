@@ -41,8 +41,8 @@ public class Product implements Serializable {
     @Column(name = "price")
     private double price;
 
-    @Column(name = "imageUrl")
-    private String imageUrl;
+    @Column(name = "image")
+    private byte[] image;
 
 
     public Long getId() {
@@ -77,12 +77,12 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public byte[] getImage() {
+        return image;
     }
 
-    public void setImageUrl(String photo) {
-        this.imageUrl = imageUrl;
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
 }

@@ -23,8 +23,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,7 +59,7 @@ public class ProductResource {
 
     @PostMapping("/create")
     @Timed
-    public ResponseEntity createProduct(@Valid @RequestBody ManagedProductVm managedProductVm) {
+    public ResponseEntity createProduct(@RequestBody ManagedProductVm managedProductVm) {
         HttpHeaders textPlainHeaders = new HttpHeaders();
         textPlainHeaders.setContentType(MediaType.TEXT_PLAIN);
 
@@ -64,7 +68,7 @@ public class ProductResource {
             .orElseGet(() -> {
                 Product product =
                     productService.createProduct(managedProductVm.getName(), managedProductVm.getCategory(),
-                        managedProductVm.getPrice(), managedProductVm.getImageUrl());
+                        managedProductVm.getPrice(), managedProductVm.getImage(), managedProductVm.isActivated());
                 return new ResponseEntity<>(HttpStatus.CREATED);
             });
     }
@@ -82,11 +86,44 @@ public class ProductResource {
 
         Product existingProduct = productRepository.findOneById(id);
 
-        Optional<ProductDTO> updatedUser = productService.updateProduct(existingProduct);
+        Optional<ProductDTO> updatedUser = productService.findProduct(existingProduct);
 
         return ResponseUtil.wrapOrNotFound(updatedUser,
             HeaderUtil.createAlert("A user is updated with identifier " + existingProduct.getpName(), existingProduct.getCategory()));
     }
+
+    @PutMapping("/update/{id}")
+    @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
+    public ResponseEntity<ProductDTO> updateUser(@PathVariable Long id, @Valid @RequestBody ManagedProductVm managedProductVm) {
+
+        Optional<ProductDTO> updatedProduct = productService.updateProduct(managedProductVm);
+
+        return ResponseUtil.wrapOrNotFound(updatedProduct,
+            HeaderUtil.createAlert("A user is updated with identifier " + managedProductVm.getName(), managedProductVm.getImage().toString()));
+    }
+
+//    @PostMapping(value = "/product-image-upload")
+//    public void uploadImage(@RequestPart(name = "uploadFile") MultipartFile uploadFile, HttpServletRequest request) {
+//
+//        if (!uploadFile.isEmpty()) {
+//            try {
+//                String uploadsDir = "../../webapp/content/uploaded";
+//                String realPathtoUploads = request.getServletContext().getRealPath(uploadsDir);
+//                if (!new File(realPathtoUploads).exists()) {
+//                    new File(realPathtoUploads).mkdir();
+//                }
+//
+//                String orgName = uploadFile.getOriginalFilename();
+//                String filePath = realPathtoUploads + orgName;
+//                File dest = new File(filePath);
+//                uploadFile
+//                uploadFile.transferTo(dest);
+//
+//                System.out.println("Hello");
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 }
-
-

@@ -4,17 +4,16 @@ import {Product} from "./product.model";
 import {ProductService} from "./product.service";
 import {OnInit} from "@angular/core";
 import {Router} from "@angular/router";
-
+import {Observable} from 'rxjs/Observable';
 @Component({
     selector: 'create-product',
     templateUrl: './create-product.component.html',
 })
 export class CreateProductComponent implements OnInit {
-    success:boolean;
-    product:any;
+    product: Product = new Product();
 
     ngOnInit() {
-        this.product = {};
+
     }
 
     categories = [
@@ -27,11 +26,19 @@ export class CreateProductComponent implements OnInit {
 
     addProduct() {
         this.productService.save(this.product).subscribe(()=> {
-            this.success = true;
+            this.router.navigate(['/product']);
         });
-        this.router.navigate(['/product'])
     }
 
 
+    fileChange(event){
+        let fileList: FileList = event.target.files;
+        if(fileList.length > 0) {
+            let file: File = fileList[0];
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => this.product.image = reader.result.substr(reader.result.indexOf(',') + 1);
+        }
+    }
 
 }

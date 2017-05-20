@@ -15,7 +15,6 @@ export const productRoute:Routes = [{
         {
             path: 'product-update/:id',
             component:UpdateProductComponent
-
         }
     ]
 }];

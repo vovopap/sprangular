@@ -33,12 +33,5 @@ export class ProductComponent implements OnInit {
             this.products.splice(indexOf, 1);
         });
     }
-
-    /*get(id:id) {
-        this.productService.get(item).subscribe(product => this.product = product);
-        console.log(this.product);
-    }*/
-
-
 }
 

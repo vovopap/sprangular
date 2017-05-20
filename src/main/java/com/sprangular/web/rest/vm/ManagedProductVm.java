@@ -15,8 +15,8 @@ public class ManagedProductVm extends ProductDTO {
         // Empty constructor needed for Jackson.
     }
 
-    public ManagedProductVm(Long id, String name, String category, Double price, boolean activated, String imageUrl) {
-        super(id, name, category, price, activated, imageUrl);
+    public ManagedProductVm(Long id, String name, String category, Double price, boolean activated, byte[] image) {
+        super(id, name, category, price, activated, image);
     }
 
     @Override

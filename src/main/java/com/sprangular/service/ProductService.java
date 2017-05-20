@@ -36,14 +36,14 @@ public class ProductService {
     }
 
     public Product createProduct(String name, String category, Double price,
-                                 String imageUrl) {
+                                 byte[] image, Boolean isActivated) {
 
         Product newProduct = new Product();
         newProduct.setpName(name);
         newProduct.setPrice(price);
         newProduct.setCategory(category);
-        newProduct.setImageUrl(imageUrl);
-        newProduct.setActivated(false);
+        newProduct.setImage(image);
+        newProduct.setActivated(isActivated);
         productRepository.save(newProduct);
         return newProduct;
     }
@@ -53,7 +53,7 @@ public class ProductService {
         product.setpName(productDTO.getName());
         product.setCategory(productDTO.getCategory());
         product.setPrice(product.getPrice());
-        product.setImageUrl(productDTO.getImageUrl());
+        product.setImage(productDTO.getImage());
         product.setActivated(true);
         productRepository.save(product);
         log.debug("Created Information for Product: {}", product);
@@ -70,14 +70,14 @@ public class ProductService {
 
     }
 
-    public Optional<ProductDTO> updateProduct(Product productDTO) {
+    public Optional<ProductDTO> findProduct(Product productDTO) {
         return Optional.of(productRepository
             .findOne(productDTO.getId()))
             .map(product -> {
                 product.setId(product.getId());
                 product.setpName(productDTO.getpName());
                 product.setCategory(productDTO.getCategory());
-                product.setImageUrl(productDTO.getImageUrl());
+                product.setImage(productDTO.getImage());
                 product.setActivated(productDTO.isActivated());
                 log.debug("Changed Information for User: {}", product);
                 return product;
@@ -85,4 +85,18 @@ public class ProductService {
             .map(ProductDTO::new);
     }
 
+    public Optional<ProductDTO> updateProduct(ProductDTO productDTO) {
+        return Optional.of(productRepository
+            .findOne(productDTO.getId()))
+            .map(product -> {
+                product.setpName(productDTO.getName());
+                product.setCategory(productDTO.getCategory());
+                product.setPrice(productDTO.getPrice());
+                product.setActivated(productDTO.isActivated());
+                product.setImage(productDTO.getImage());
+                log.debug("Changed Information for User: {}", product);
+                return product;
+            })
+            .map(ProductDTO::new);
+    }
 }

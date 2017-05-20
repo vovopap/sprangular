@@ -11,10 +11,10 @@ import {Observable} from 'rxjs/Observable';
     templateUrl: './product-update.component.html',
 })
 export class UpdateProductComponent implements OnInit {
-    private m:number;
-    product:Product;
+    product:Product = new Product();
 
     ngOnInit():void {
+        this.productService.get(+this.route.snapshot.params['id']).subscribe(product => this.product = product);
     }
 
     categories = [
@@ -22,20 +22,11 @@ export class UpdateProductComponent implements OnInit {
     ];
 
     constructor(private productService:ProductService, private router:Router, private route:ActivatedRoute) {
-        this.route.params.subscribe(params => {
-            this.m = +params['id'];
-            productService.get(this.m).subscribe(
-                product => this.product = product
-            );
-        });
     }
 
-    update(item:Product) {
-        this.productService.update(item).subscribe(product => this.product = product);
-        console.log(this.product);
-        console.log(item);
-        this.router.navigate(['/product-create']);
-    }
+    updateProduct() {
+        this.productService.update(this.product).subscribe(() => this.router.navigate(['/product']));
 
+    }
 
 }
